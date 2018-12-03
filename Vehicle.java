@@ -17,7 +17,10 @@ public class Vehicle implements Profitable {
      */
     //============================================================================
     //TODO
-    
+    public Vehicle() {
+
+    }
+
     //============================================================================
 
 
@@ -29,6 +32,11 @@ public class Vehicle implements Profitable {
      */
     //============================================================================
     //TODO
+
+    public Vehicle(String licensePlate, double maxWeight) {
+        this.licensePlate = licensePlate;
+        this.maxWeight = maxWeight;
+    }
     
     //============================================================================
 
@@ -39,7 +47,7 @@ public class Vehicle implements Profitable {
      * @return license plate of this vehicle
      */
     public String getLicensePlate() {
-        //TODO
+        return licensePlate;
     }
 
     
@@ -52,7 +60,7 @@ public class Vehicle implements Profitable {
      * @param licensePlate license plate to be updated to
      */
     public void setLicensePlate(String licensePlate) {
-        //TODO
+        this.licensePlate = licensePlate;
     }
     
     
@@ -67,7 +75,7 @@ public class Vehicle implements Profitable {
      * @return the maximum weight that this vehicle can carry
      */
     public double getMaxWeight() {
-        //TODO  
+        return maxWeight;
     }
 
     
@@ -80,7 +88,9 @@ public class Vehicle implements Profitable {
      * @param maxWeight max weight to be updated to
      */
     public void setMaxWeight(double maxWeight) {
-        //TODO
+
+        this.maxWeight = maxWeight;
+
     }
 
     
@@ -94,7 +104,7 @@ public class Vehicle implements Profitable {
      * @return current weight of all packages inside vehicle
      */
     public double getCurrentWeight() {
-        //TODO
+        return currentWeight;
     }
     
     
@@ -108,7 +118,9 @@ public class Vehicle implements Profitable {
      * @return current ZIP code destination of vehicle
      */
     public int getZipDest() {
-        //TODO 
+
+        return zipDest;
+
     }
     
     
@@ -122,7 +134,7 @@ public class Vehicle implements Profitable {
      * @param zipDest ZIP code destination to be updated to
      */
     public void setZipDest(int zipDest) {
-        //TODO
+        this.zipDest = zipDest;
     }
 
     
@@ -136,7 +148,9 @@ public class Vehicle implements Profitable {
      * @return ArrayList of packages in vehicle
      */
     public ArrayList<Package> getPackages() {
-        //TODO
+
+        return packages;
+
     }
 
     
@@ -152,7 +166,14 @@ public class Vehicle implements Profitable {
      * @return whether or not it was successful in adding the package
      */
     public boolean addPackage(Package pkg) {
-        //TODO
+        if (pkg.getWeight() + currentWeight > maxWeight) {
+            return false;
+        } else {
+            packages.add(pkg);
+            currentWeight += pkg.getWeight();
+            return true;
+        }
+
     }
 
     
@@ -164,7 +185,10 @@ public class Vehicle implements Profitable {
      * Clears vehicle of packages and resets its weight to zero
      */
     public void empty() {
-        //TODO
+
+        ArrayList<Package> newPackages = new ArrayList<>(packages.size());
+        packages = newPackages;
+        currentWeight = 0;
     }
     
     
@@ -179,7 +203,10 @@ public class Vehicle implements Profitable {
      * @return whether or not Vehicle is full
      */
     public boolean isFull() {
-        //TODO
+        if (maxWeight - currentWeight < 0.0000001) {
+            return true;
+        }
+        return false;
     }
 
     
@@ -199,6 +226,15 @@ public class Vehicle implements Profitable {
      */
     public void fill(ArrayList<Package> warehousePackages) {
         //TODO
+        for (int i = 0; i < warehousePackages.size(); i++) {
+            Package currentPackage = warehousePackages.get(i);
+            if (currentPackage.getWeight() + currentWeight < maxWeight) {
+                packages.add(currentPackage);
+                currentWeight += currentPackage.getWeight();
+            }
+
+
+        }
     }
 
     

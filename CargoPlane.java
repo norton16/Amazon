@@ -12,6 +12,10 @@ public class CargoPlane extends Vehicle {
      */
     //============================================================================
     //TODO
+
+    public CargoPlane() {
+
+    }
     
     //============================================================================
 
@@ -22,8 +26,11 @@ public class CargoPlane extends Vehicle {
      * @param maxWeight    maximum weight that the vehicle can hold
      */
     //============================================================================
-    //TODO
-    
+
+    public CargoPlane(String licensePlate, double maxWeight) {
+        super(licensePlate, maxWeight);
+
+    }
     //============================================================================
 
     /**
