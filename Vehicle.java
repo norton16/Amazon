@@ -18,7 +18,11 @@ public class Vehicle implements Profitable {
     //============================================================================
     //TODO
     public Vehicle() {
-
+        this.licensePlate = "";
+        this.maxWeight = 0;
+        this.currentWeight = 0;
+        this.zipDest = 0;
+        this.packages = new ArrayList<>();
     }
 
     //============================================================================
@@ -36,6 +40,7 @@ public class Vehicle implements Profitable {
     public Vehicle(String licensePlate, double maxWeight) {
         this.licensePlate = licensePlate;
         this.maxWeight = maxWeight;
+
     }
     
     //============================================================================

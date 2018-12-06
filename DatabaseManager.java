@@ -1,3 +1,8 @@
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
+
+import java.io.*;
+import java.util.ArrayList;
+
 /**
  * <h1>Database Manager</h1>
  * 
@@ -20,6 +25,43 @@ public class DatabaseManager {
      */
     public static ArrayList<Vehicle> loadVehicles(File file) {
        //TODO
+        ArrayList<Vehicle> vehicles = new ArrayList<>();
+
+        try {
+            File f = new File(file.getPath());
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+
+            while (true) {
+                String word = br.readLine();
+                if (word == null) {
+                    break;
+                }
+                if (word.startsWith("Drone"))
+                {
+                    String[] v = word.split(",");
+                    vehicles.add(new Drone(v[2], Double.valueOf(v[3])));
+                }
+                if (word.startsWith("Truck"))
+                {
+                    String[] v = word.split(",");
+                    vehicles.add(new Truck(v[2], Double.valueOf(v[3])));
+                }
+                if (word.startsWith("Cargo Plane"))
+                {
+                    String[] v = word.split(",");
+                    vehicles.add(new Truck(v[2], Double.valueOf(v[3])));
+                }
+
+
+            }
+            fr.close();
+            br.close();
+        }
+        catch (Exception e) {
+            return new ArrayList<>();
+        }
+        return vehicles;
     }
 
     
@@ -48,6 +90,32 @@ public class DatabaseManager {
      */
     public static ArrayList<Package> loadPackages(File file) {
     	//TODO
+        ArrayList<Package> packages = new ArrayList<>();
+
+        try {
+            File f = new File(file.getPath());
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+
+            while (true) {
+                String word = br.readLine();
+                if (word == null) {
+                    break;
+                }
+                    String[] v = word.split(",");
+                    packages.add(new Package(v[0], v[1],
+                            Double.valueOf(v[2]),
+                            Double.valueOf(v[3]),
+                            new ShippingAddress(v[4], v[5], v[6], v[7], Integer.valueOf(v[8]))));
+
+            }
+            fr.close();
+            br.close();
+        }
+        catch (Exception e) {
+            return new ArrayList<>();
+        }
+        return packages;
     }
     
     
@@ -64,6 +132,26 @@ public class DatabaseManager {
      */
     public static double loadProfit(File file) {
     	//TODO
+        String profit = "";
+        try {
+            File f = new File(file.getPath());
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+
+            while (true) {
+                String word = br.readLine();
+                if (word == null) {
+                    break;
+                }
+               profit += word;
+            }
+            fr.close();
+            br.close();
+        }
+        catch (Exception e) {
+            return 0;
+        }
+        return Double.valueOf(profit);
     }
 
     
@@ -79,6 +167,27 @@ public class DatabaseManager {
      */
     public static int loadPackagesShipped(File file) {
     	//TODO
+        String number = "";
+        try {
+            File f = new File(file.getPath());
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+
+            while (true) {
+                String word = br.readLine();
+                if (word == null) {
+                    break;
+                }
+                number += word;
+            }
+            fr.close();
+            br.close();
+        }
+        catch (Exception e) {
+            return 0;
+        }
+        return Integer.valueOf(number);
+
     }
 
     
@@ -93,6 +202,26 @@ public class DatabaseManager {
      */
     public static boolean loadPrimeDay(File file) {
     	//TODO
+        String prime = "";
+        try {
+            File f = new File(file.getPath());
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+
+            while (true) {
+                String word = br.readLine();
+                if (word == null) {
+                    break;
+                }
+                prime += word;
+            }
+            fr.close();
+            br.close();
+        }
+        catch (Exception e) {
+            return false;
+        }
+        return prime.equals("1");
     }
 
     
@@ -113,6 +242,40 @@ public class DatabaseManager {
      */
     public static void saveVehicles(File file, ArrayList<Vehicle> vehicles) {
     	//TODO
+        String vehicles2 = "";
+        for (int i = 0; i < vehicles.size(); i++)
+        {
+            if(vehicles.get(i) instanceof Truck)
+            {
+                vehicles2 += ("Truck," + vehicles.get(i).getLicensePlate() + "," + vehicles.get(i).getMaxWeight());
+            }
+            if(vehicles.get(i) instanceof Drone)
+            {
+                vehicles2 += ("Drone," + vehicles.get(i).getLicensePlate() + "," + vehicles.get(i).getMaxWeight());
+            }
+            if(vehicles.get(i) instanceof CargoPlane)
+            {
+                vehicles2 += ("Cargoplane," + vehicles.get(i).getLicensePlate() + "," + vehicles.get(i).getMaxWeight());
+            }
+            vehicles2 += '\n';
+        }
+        try {
+            File f = new File(file.getPath());
+            FileWriter fw = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for(int i = 0; i < vehicles.size(); i++)
+            {
+                bw.write(vehicles2);
+            }
+
+            fw.close();
+            bw.close();
+        }
+        catch (Exception e) {
+            System.out.println("Error");
+        }
+
     }
 
     
@@ -138,6 +301,37 @@ public class DatabaseManager {
      */
     public static void savePackages(File file, ArrayList<Package> packages) {
     	//TODO
+
+        String packages2 = "";
+        for (int i = 0; i < packages.size(); i++)
+        {
+            packages2 += (packages.get(i).getID() + ",");
+            packages2 += (packages.get(i).getProduct() + ",");
+            packages2 += (packages.get(i).getWeight() + ",");
+            packages2 += (packages.get(i).getPrice() + ",");
+            packages2 += (packages.get(i).getDestination().getBuyerName() + ",");
+            packages2 += (packages.get(i).getDestination().getAddress() + ",");
+            packages2 += (packages.get(i).getDestination().getCity() + ",");
+            packages2 += (packages.get(i).getDestination().getState() + ",");
+            packages2 += (packages.get(i).getDestination().getZip());
+            packages2 += '\n';
+        }
+        try {
+            File f = new File(file.getPath());
+            FileWriter fw = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for(int i = 0; i < packages.size(); i++)
+            {
+                bw.write(packages2);
+            }
+
+            fw.close();
+            bw.close();
+        }
+        catch (Exception e) {
+            System.out.println("Error");
+        }
     }
 
     
@@ -152,6 +346,20 @@ public class DatabaseManager {
 
     public static void saveProfit(File file, double profit) {
     	//TODO
+        String profit2 = String.valueOf(profit);
+        try {
+            File f = new File(file.getPath());
+            FileWriter fw = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write(profit2);
+
+            fw.close();
+            bw.close();
+        }
+        catch (Exception e) {
+            System.out.println("Error");
+        }
     }
 
     
@@ -167,6 +375,21 @@ public class DatabaseManager {
 
     public static void savePackagesShipped(File file, int nPackages) {
     	//TODO
+        String profit2 = String.valueOf(nPackages);
+        try {
+            File f = new File(file.getPath());
+            FileWriter fw = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write(profit2);
+
+            fw.close();
+            bw.close();
+        }
+        catch (Exception e) {
+            System.out.println("Error");
+        }
+
     }
 
     
@@ -184,5 +407,27 @@ public class DatabaseManager {
 
     public static void savePrimeDay(File file, boolean primeDay) {
     	//TODO
+        String prime = "";
+        if (primeDay)
+        {
+            prime = "1";
+        }
+        if (!primeDay)
+        {
+            prime = "2";
+        }
+        try {
+            File f = new File(file.getPath());
+            FileWriter fw = new FileWriter(f);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            bw.write(prime);
+
+            fw.close();
+            bw.close();
+        }
+        catch (Exception e) {
+            System.out.println("Error");
+        }
     }
 }

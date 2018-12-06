@@ -1,3 +1,5 @@
+import javafx.scene.shape.TriangleMesh;
+
 import java.util.ArrayList;
 
 
@@ -13,6 +15,9 @@ public class Truck extends Vehicle {
      */
     //============================================================================
     //TODO
+    public Truck()
+    {
+    }
     
     //============================================================================
 
@@ -24,6 +29,10 @@ public class Truck extends Vehicle {
      */
     //============================================================================
     //TODO
+    public Truck(String licensePlate, double maxWeight)
+    {
+        super(licensePlate, maxWeight);
+    }
     
     //============================================================================
 
@@ -41,6 +50,19 @@ public class Truck extends Vehicle {
     @Override
     public double getProfit() {
         //TODO
+        double p = 0;
+        double g = 0;
+        double i = 0;
+
+
+        for (int j = 0; j < getPackages().size(); j++)
+        {
+            p += getPackages().get(j).getPrice();
+            
+
+        }
+
+
     	
     }
 
