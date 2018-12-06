@@ -414,7 +414,7 @@ public class DatabaseManager {
         }
         if (!primeDay)
         {
-            prime = "2";
+            prime = "0";
         }
         try {
             File f = new File(file.getPath());
