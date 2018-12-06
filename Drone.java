@@ -6,12 +6,15 @@ import java.util.ArrayList;
 
 public class Drone extends Vehicle {
 
+
     final private double GAS_RATE = 1.33;
     /**
      * Default Contructor 
      */
     //============================================================================
-    //TODO
+    public Drone() {
+
+    }
     
     //============================================================================
 
@@ -22,7 +25,9 @@ public class Drone extends Vehicle {
      * @param maxWeight    maximum weight that the vehicle can hold
      */
     //============================================================================
-    //TODO
+    public Drone(String licensePlate, double maxWeight) {
+        super(licensePlate, maxWeight);
+    }
     
     //============================================================================
 
@@ -39,7 +44,19 @@ public class Drone extends Vehicle {
      */
     @Override
     public double getProfit() {
-    	//TODO
+
+        double profit = 0;
+        for (int i = 0; i < getPackages().size(); i++) {
+            Package current = getPackages().get(i);
+            double price = current.getPrice();
+            profit += price;
+
+        }
+
+        double gasPrice = GAS_RATE * getMaxRange();
+        profit -= gasPrice;
+        return profit;
+
     	
     }
 
@@ -57,7 +74,22 @@ public class Drone extends Vehicle {
      */
     @Override
     public String report() {
-    	//TODO
+        String packageLabels = "";
+
+        for (int i = 0; i < getPackages().size(); i++) {
+            String thisPackage = getPackages().get(i).shippingLabel();
+            packageLabels += thisPackage;
+
+        }
+        String report = "==========Drone Report==========\n" +
+                "License Plate No.: " + getLicensePlate() + "\n" +
+                "Destination: " + getZipDest() + "\n" +
+                "Weight Load: " + getCurrentWeight() + "/" + getMaxWeight() + "\n" +
+                "Net Profit: $" + getProfit() + "\n" +
+                "=====Shipping Labels=====\n" +
+                "====================\n" + packageLabels;
+
+        return report;
     }
     
    

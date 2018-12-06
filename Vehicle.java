@@ -12,6 +12,7 @@ public class Vehicle implements Profitable {
     private ArrayList<Package> packages;
 
 
+
     /**
      * Default Constructor
      */
@@ -153,6 +154,18 @@ public class Vehicle implements Profitable {
 
     }
 
+    public int getMaxRange() {
+        int maxRange = 0;
+        for (int i = 0; i < packages.size(); i++) {
+            if (Math.abs(getZipDest() - packages.get(i).getDestination().getZip()) > maxRange) {
+                maxRange = (Math.abs(getZipDest() - packages.get(i).getDestination().getZip()));
+            }
+
+        }
+        return maxRange;
+
+    }
+
     
     
     
@@ -210,10 +223,6 @@ public class Vehicle implements Profitable {
     }
 
     
-    
-    
-    
-    
     /**
      * Fills vehicle with packages with preference of date added and range of its
      * destination zip code. It will iterate over the packages intially at a range
@@ -224,18 +233,48 @@ public class Vehicle implements Profitable {
      * 
      * @param warehousePackages List of packages to add from
      */
+
+
     public void fill(ArrayList<Package> warehousePackages) {
         //TODO
+
+        int maxRange = 0;
+
         for (int i = 0; i < warehousePackages.size(); i++) {
-            Package currentPackage = warehousePackages.get(i);
-            if (currentPackage.getWeight() + currentWeight < maxWeight) {
-                packages.add(currentPackage);
-                currentWeight += currentPackage.getWeight();
+            int thisRange = Math.abs(getZipDest() - warehousePackages.get(i).getDestination().getZip());
+            if (thisRange > maxRange) {
+                maxRange = thisRange;
+            }
+
+        }
+
+        for (int i = 0; i < warehousePackages.size(); i++) {
+            for (int j = 0; j <= maxRange; j++) {
+
+                if (Math.abs(warehousePackages.get(i).getDestination().getZip() - getZipDest()) == j) {
+                    Package currentPackage = warehousePackages.get(i);
+                    if (currentPackage.getWeight() + currentWeight < maxWeight) {
+                        packages.add(currentPackage);
+                        currentWeight += currentPackage.getWeight();
+                    }
+                }
             }
 
 
         }
     }
+
+    public double getProfit() {
+
+        return 0;
+
+    }
+
+    public String report() {
+        return "";
+    }
+
+
 
     
 
