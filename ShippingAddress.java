@@ -4,69 +4,69 @@
 public class ShippingAddress {
 
 
-    private static String buyerName;
-    private static String address;
-    private static String city;
-    private static String state;
-    private static int zip;
+    private  String name;
+    private  String address;
+    private  String city;
+    private  String state;
+    private  int ZipCode;
 
     public ShippingAddress() {
 
     }
 
-    public ShippingAddress(String buyerName, String address, String city, String state, int zip) {
-        this.buyerName = buyerName;
+    public ShippingAddress(String name, String address, String city, String state, int zipCode) {
+        this.name = name;
         this.address = address;
         this.city = city;
         this.state = state;
-        this.zip = zip;
+        this.ZipCode = zipCode;
     }
 
-    public String getBuyerName() {
-        return buyerName;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public int getZip() {
-        return zip;
-    }
-
-    public void setBuyerName(String buyerName) {
-        this.buyerName = buyerName;
-    }
-
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCity() {
+        return city;
     }
 
     public void setCity(String city) {
         this.city = city;
     }
 
+    public String getState() {
+        return state;
+    }
+
     public void setState(String state) {
         this.state = state;
     }
 
-    public void setZip(int zip) {
-        this.zip = zip;
+    public int getZipCode() {
+        return ZipCode;
     }
 
-    public static String toString(ShippingAddress currentBuyer) {
-        return "TO: " + buyerName + "\n" +
+    public void setZipCode(int zipCode) {
+        ZipCode = zipCode;
+    }
+
+    public  String toString(ShippingAddress currentBuyer) {
+        return "TO: " + name + "\n" +
                 address + "\n" +
                 city + ", " + state +
-                ", " + zip;
+                ", " + ZipCode;
 
     }
 }
