@@ -134,10 +134,14 @@ public class Package {
     public String shippingLabel() {
 
         //TODO
-    	return ShippingAddress.toString(destination) +
-                "Weight:       " + String.format("%.2f", getWeight()) +
-                "Price:    $" + String.format("%.2f", getPrice()) +
-                "Product: " + getProduct();
+    	String label = String.format(ShippingAddress.toString(destination) +
+                "Weight:         %.2f\n" +
+                "Price:        $%.2f\n" +
+                "Product:%s\n" +
+                "====================",
+                getWeight(), getPrice(), getProduct());
+
+    	return label;
 
     }
 
