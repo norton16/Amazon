@@ -25,9 +25,10 @@ public class DatabaseManager {
         //TODO
         ArrayList<Vehicle> vehicles = new ArrayList<>();
 
+
         try {
-            File f = new File(file.getAbsolutePath());
-            FileReader fr = new FileReader(f);
+            //File f = new File(file.getAbsoluteFile().getAbsolutePath());
+            FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
 
             while (true) {
@@ -58,6 +59,7 @@ public class DatabaseManager {
         }
         catch (Exception e) {
             return new ArrayList<>();
+
         }
         return vehicles;
     }
@@ -91,8 +93,8 @@ public class DatabaseManager {
         ArrayList<Package> packages = new ArrayList<>();
 
         try {
-            File f = new File(file.getAbsolutePath());
-            FileReader fr = new FileReader(f);
+            //File f = new File(file.getAbsolutePath());
+            FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
 
             while (true) {
@@ -132,8 +134,8 @@ public class DatabaseManager {
         //TODO
         String profit = "";
         try {
-            File f = new File(file.getAbsolutePath());
-            FileReader fr = new FileReader(f);
+            //File f = new File(file.getAbsolutePath());
+            FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
 
             while (true) {
@@ -167,8 +169,8 @@ public class DatabaseManager {
         //TODO
         String number = "";
         try {
-            File f = new File(file.getAbsolutePath());
-            FileReader fr = new FileReader(f);
+            //File f = new File(file.getAbsolutePath());
+            FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
 
             while (true) {
@@ -202,8 +204,8 @@ public class DatabaseManager {
         //TODO
         String prime = "";
         try {
-            File f = new File(file.getAbsolutePath());
-            FileReader fr = new FileReader(f);
+            //File f = new File(file.getAbsoluteFile().getAbsolutePath());
+            FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
 
             while (true) {
@@ -215,8 +217,10 @@ public class DatabaseManager {
             }
             fr.close();
             br.close();
+
         }
         catch (Exception e) {
+
             return false;
         }
         return prime.equals("1");
@@ -258,8 +262,8 @@ public class DatabaseManager {
             vehicles2 += '\n';
         }
         try {
-            File f = new File(file.getAbsolutePath());
-            FileWriter fw = new FileWriter(f);
+            //File f = new File(file.getAbsolutePath());
+            FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
 
             for(int i = 0; i < vehicles.size(); i++)
@@ -267,8 +271,9 @@ public class DatabaseManager {
                 bw.write(vehicles2);
             }
 
-            fw.close();
             bw.close();
+            fw.close();
+
         }
         catch (Exception e) {
             System.out.println("Error");
@@ -315,15 +320,15 @@ public class DatabaseManager {
             packages2 += '\n';
         }
         try {
-            File f = new File(file.getAbsolutePath());
-            FileWriter fw = new FileWriter(f);
+            //File f = new File(file.getAbsolutePath());
+            FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
 
-                bw.write(packages2);
+            bw.write(packages2);
 
-
-            fw.close();
             bw.close();
+            fw.close();
+
         }
         catch (Exception e) {
             System.out.println("Error");
@@ -344,14 +349,15 @@ public class DatabaseManager {
         //TODO
         String profit2 = String.valueOf(profit);
         try {
-            File f = new File(file.getAbsolutePath());
-            FileWriter fw = new FileWriter(f);
+            //File f = new File(file.getAbsolutePath());
+            FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
 
             bw.write(profit2);
 
-            fw.close();
             bw.close();
+            fw.close();
+
         }
         catch (Exception e) {
             System.out.println("Error");
@@ -373,14 +379,15 @@ public class DatabaseManager {
         //TODO
         String profit2 = String.valueOf(nPackages);
         try {
-            File f = new File(file.getAbsolutePath());
-            FileWriter fw = new FileWriter(f);
+            //File f = new File(file.getAbsolutePath());
+            FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
 
             bw.write(profit2);
 
-            fw.close();
             bw.close();
+            fw.close();
+
         }
         catch (Exception e) {
             System.out.println("Error");
@@ -413,17 +420,20 @@ public class DatabaseManager {
             prime = "0";
         }
         try {
-            File f = new File(file.getAbsolutePath());
-            FileWriter fw = new FileWriter(f);
+            //File f = new File(file.getAbsoluteFile().getPath());
+            FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
 
             bw.write(prime);
 
-            fw.close();
+
             bw.close();
+            fw.close();
+
+
         }
         catch (Exception e) {
-            System.out.println("Error");
+            System.out.println("Prime Save Error");
         }
     }
 }

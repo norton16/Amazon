@@ -15,7 +15,6 @@ public class Warehouse {
     final static File N_PACKAGES_FILE = new File(folderPath + "NumberOfPackages.txt");
     final static File PRIME_DAY_FILE = new File(folderPath + "PrimeDay.txt");
     final static double PRIME_DAY_DISCOUNT = .15;
-
     public static void printStatisticsReport(double profits, int packagesShipped, int numberOfPackages)
     {
         System.out.println("==========Statistics==========\n" +
