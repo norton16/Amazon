@@ -136,8 +136,9 @@ public class Warehouse {
                     new ShippingAddress(buyername, address, city, state, zip));
             System.out.println(p.shippingLabel());
 
-            DatabaseManager.loadPackages(PACKAGE_FILE).add(p);
-            DatabaseManager.savePackages(PACKAGE_FILE, DatabaseManager.loadPackages(PACKAGE_FILE));
+            ArrayList<Package> x = DatabaseManager.loadPackages(PACKAGE_FILE);
+            x.add(p);
+            DatabaseManager.savePackages(PACKAGE_FILE, x);
         }
 
         else if (choice.equals("2")) ////////////
@@ -176,8 +177,9 @@ public class Warehouse {
                 int maxWeight = Integer.valueOf(scan.nextLine());
                 vehicle = new CargoPlane(licensePlate, maxWeight);
             }
-            DatabaseManager.loadVehicles(VEHICLE_FILE).add(vehicle);
-            DatabaseManager.saveVehicles(VEHICLE_FILE, DatabaseManager.loadVehicles(VEHICLE_FILE));
+            ArrayList<Vehicle> x = DatabaseManager.loadVehicles(VEHICLE_FILE);
+            x.add(vehicle);
+            DatabaseManager.saveVehicles(VEHICLE_FILE, x);
         }
 
         else if (choice.equals("3"))/////////////////////////////////////
@@ -486,6 +488,7 @@ public class Warehouse {
 
         }
         //3) save data (vehicle, packages, profits, packages shipped and primeday) to files (overwriting them) using DatabaseManager
+
     }
 }
 
