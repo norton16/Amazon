@@ -63,10 +63,11 @@ public class ShippingAddress {
     }
 
     public static String toString(ShippingAddress currentBuyer) {
-        return "TO: " + name + "\n" +
-                address + "\n" +
-                city + ", " + state +
-                ", " + zipCode;
-
+        String label = String.format("====================\n" +
+                "TO: %s" + "\n" +
+                "%s           \n" +
+                "%s, %s, %d\n", name, address, city,
+        state, zipCode);
+        return label;
     }
 }
