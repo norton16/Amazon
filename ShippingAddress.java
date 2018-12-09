@@ -8,7 +8,7 @@ public class ShippingAddress {
     private static String address;
     private static String city;
     private static String state;
-    private static int ZipCode;
+    private static int zipCode;
 
     public ShippingAddress() {
 
@@ -19,7 +19,7 @@ public class ShippingAddress {
         this.address = address;
         this.city = city;
         this.state = state;
-        this.ZipCode = zipCode;
+        this.zipCode = zipCode;
     }
 
     public String getName() {
@@ -55,18 +55,18 @@ public class ShippingAddress {
     }
 
     public int getZipCode() {
-        return ZipCode;
+        return zipCode;
     }
 
     public void setZipCode(int zipCode) {
-        ZipCode = zipCode;
+        this.zipCode = zipCode;
     }
 
     public static String toString(ShippingAddress currentBuyer) {
         return "TO: " + name + "\n" +
                 address + "\n" +
                 city + ", " + state +
-                ", " + ZipCode;
+                ", " + zipCode;
 
     }
 }

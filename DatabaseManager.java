@@ -1,5 +1,3 @@
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -309,11 +307,11 @@ public class DatabaseManager {
             packages2 += (packages.get(i).getProduct() + ",");
             packages2 += (packages.get(i).getWeight() + ",");
             packages2 += (packages.get(i).getPrice() + ",");
-            packages2 += (packages.get(i).getDestination().getBuyerName() + ",");
+            packages2 += (packages.get(i).getDestination().getName() + ",");
             packages2 += (packages.get(i).getDestination().getAddress() + ",");
             packages2 += (packages.get(i).getDestination().getCity() + ",");
             packages2 += (packages.get(i).getDestination().getState() + ",");
-            packages2 += (packages.get(i).getDestination().getZip());
+            packages2 += (packages.get(i).getDestination().getZipCode());
             packages2 += '\n';
         }
         try {

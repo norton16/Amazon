@@ -16,10 +16,19 @@ public class Warehouse {
     final static File PRIME_DAY_FILE = new File(folderPath + "PrimeDay.txt");
     final static double PRIME_DAY_DISCOUNT = .15;
 
+    public static void printStatisticsReport(double profits, int packagesShipped, int numberOfPackages)
+    {
+        System.out.println("==========Statistics==========\n" +
+                "Profits:                 $" + profits + "\n" +
+                "Packages Shipped:                " + packagesShipped + "\n" +
+                "Packages in Warehouse:           " + numberOfPackages + "\n" +
+                "==============================\n");
+    }
+
     public static int zipMode(ArrayList<ShippingAddress> sa) {
         ArrayList<Integer> zipDests = new ArrayList<>();
         for (int i = 0; i < sa.size(); i++) {
-            zipDests.add(sa.get(i).getZip());
+            zipDests.add(sa.get(i).getZipCode());
         }
         HashMap<Integer, Integer> modeHash = new HashMap<Integer, Integer>();
         int maxZip = 1;
@@ -223,7 +232,7 @@ public class Warehouse {
                                         switch (numZipCode) {
                                             case 1:
                                                 ShippingAddress packDest = packages.get(0).getDestination();
-                                                int zipDest = packDest.getZip();
+                                                int zipDest = packDest.getZipCode();
                                                 truck.setZipDest(zipDest);
                                                 truck.fill(packages);
                                                 profit += truck.getProfit();
@@ -239,8 +248,8 @@ public class Warehouse {
                                                     dests.add(packages.get(i).getDestination());
                                                 }
                                                 for (int j = dests.size() - 1; j > 0; j--) {
-                                                    if (dests.get(j).getZip() != dests.get(j - 1).getZip()) {
-                                                        truck.setZipDest(dests.get(i).getZip());
+                                                    if (dests.get(j).getZipCode() != dests.get(j - 1).getZipCode()) {
+                                                        truck.setZipDest(dests.get(i).getZipCode());
                                                     } else {
                                                         truck.setZipDest(zipMode(dests));
 
@@ -284,7 +293,7 @@ public class Warehouse {
                                         switch (numZipCode) {
                                             case 1:
                                                 ShippingAddress packDest = packages.get(0).getDestination();
-                                                int zipDest = packDest.getZip();
+                                                int zipDest = packDest.getZipCode();
                                                 drone.setZipDest(zipDest);
                                                 drone.fill(packages);
                                                 profit += drone.getProfit();
@@ -299,8 +308,8 @@ public class Warehouse {
                                                     dests.add(packages.get(i).getDestination());
                                                 }
                                                 for (int j = dests.size() - 1; j > 0; j--) {
-                                                    if (dests.get(j).getZip() != dests.get(j - 1).getZip()) {
-                                                        drone.setZipDest(dests.get(i).getZip());
+                                                    if (dests.get(j).getZipCode() != dests.get(j - 1).getZipCode()) {
+                                                        drone.setZipDest(dests.get(i).getZipCode());
                                                     } else {
                                                         drone.setZipDest(zipMode(dests));
 
@@ -344,7 +353,7 @@ public class Warehouse {
                                         switch (numZipCode) {
                                             case 1:
                                                 ShippingAddress packDest = packages.get(0).getDestination();
-                                                int zipDest = packDest.getZip();
+                                                int zipDest = packDest.getZipCode();
                                                 cg.setZipDest(zipDest);
                                                 cg.fill(packages);
                                                 profit += cg.getProfit();
@@ -359,8 +368,8 @@ public class Warehouse {
                                                     dests.add(packages.get(i).getDestination());
                                                 }
                                                 for (int j = dests.size() - 1; j > 0; j--) {
-                                                    if (dests.get(j).getZip() != dests.get(j - 1).getZip()) {
-                                                        cg.setZipDest(dests.get(i).getZip());
+                                                    if (dests.get(j).getZipCode() != dests.get(j - 1).getZipCode()) {
+                                                        cg.setZipDest(dests.get(i).getZipCode());
                                                     } else {
                                                         cg.setZipDest(zipMode(dests));
 
@@ -410,7 +419,7 @@ public class Warehouse {
                                 switch (numZipCode) {
                                     case 1:
                                         ShippingAddress packDest = packages.get(0).getDestination();
-                                        int zipDest = packDest.getZip();
+                                        int zipDest = packDest.getZipCode();
                                         vehicle.setZipDest(zipDest);
                                         vehicle.fill(packages);
                                         profit += vehicle.getProfit();
@@ -425,8 +434,8 @@ public class Warehouse {
                                             dests.add(packages.get(j).getDestination());
                                         }
                                         for (int j = dests.size() - 1; j > 0; j--) {
-                                            if (dests.get(j).getZip() != dests.get(j - 1).getZip()) {
-                                                vehicle.setZipDest(dests.get(j).getZip());
+                                            if (dests.get(j).getZipCode() != dests.get(j - 1).getZipCode()) {
+                                                vehicle.setZipDest(dests.get(j).getZipCode());
                                             } else {
                                                 vehicle.setZipDest(zipMode(dests));
 
@@ -468,11 +477,7 @@ public class Warehouse {
             ArrayList<Package> inWarehouse = DatabaseManager.loadPackages(PACKAGE_FILE);
             int sizeInWarehouse = inWarehouse.size();
             int left = sizeInWarehouse - numPackagesShipped;
-            System.out.println("==========Statistics==========\n" +
-                    "Profits:                 $" + profit + "\n" +
-                    "Packages Shipped:                " + numPackagesShipped + "\n" +
-                    "Packages in Warehouse:           " + left + "\n" +
-                    "==============================\n");
+            printStatisticsReport(profit, numPackagesShipped, left);
         }
         else if (choice.equals("6")) {
 

@@ -157,8 +157,8 @@ public class Vehicle implements Profitable {
     public int getMaxRange() {
         int maxRange = 0;
         for (int i = 0; i < packages.size(); i++) {
-            if (Math.abs(getZipDest() - packages.get(i).getDestination().getZip()) > maxRange) {
-                maxRange = (Math.abs(getZipDest() - packages.get(i).getDestination().getZip()));
+            if (Math.abs(getZipDest() - packages.get(i).getDestination().getZipCode()) > maxRange) {
+                maxRange = (Math.abs(getZipDest() - packages.get(i).getDestination().getZipCode()));
             }
 
         }
@@ -241,7 +241,7 @@ public class Vehicle implements Profitable {
         int maxRange = 0;
 
         for (int i = 0; i < warehousePackages.size(); i++) {
-            int thisRange = Math.abs(getZipDest() - warehousePackages.get(i).getDestination().getZip());
+            int thisRange = Math.abs(getZipDest() - warehousePackages.get(i).getDestination().getZipCode());
             if (thisRange > maxRange) {
                 maxRange = thisRange;
             }
@@ -251,7 +251,7 @@ public class Vehicle implements Profitable {
         for (int i = 0; i < warehousePackages.size(); i++) {
             for (int j = 0; j <= maxRange; j++) {
 
-                if (Math.abs(warehousePackages.get(i).getDestination().getZip() - getZipDest()) == j) {
+                if (Math.abs(warehousePackages.get(i).getDestination().getZipCode() - getZipDest()) == j) {
                     Package currentPackage = warehousePackages.get(i);
                     if (currentPackage.getWeight() + currentWeight < maxWeight) {
                         packages.add(currentPackage);

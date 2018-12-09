@@ -50,7 +50,7 @@ public class CargoPlane extends Vehicle {
         int maxRange = 0;
 
         for (int i = 0; i < warehousePackages.size(); i++) {
-            int thisRange = Math.abs(getZipDest() - warehousePackages.get(i).getDestination().getZip());
+            int thisRange = Math.abs(getZipDest() - warehousePackages.get(i).getDestination().getZipCode());
             if (thisRange > maxRange) {
                 maxRange = thisRange * 10;
             }
@@ -60,7 +60,7 @@ public class CargoPlane extends Vehicle {
         for (int i = 0; i < warehousePackages.size(); i++) {
             for (int j = 0; j <= maxRange; j++) {
 
-                if (Math.abs(warehousePackages.get(i).getDestination().getZip() - getZipDest()) == j) {
+                if (Math.abs(warehousePackages.get(i).getDestination().getZipCode() - getZipDest()) == j) {
                     Package currentPackage = warehousePackages.get(i);
                     if (currentPackage.getWeight() + cargoCurrentWeight < getMaxWeight()) {
                         getPackages().add(currentPackage);
