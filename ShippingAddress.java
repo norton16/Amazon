@@ -4,11 +4,11 @@
 public class ShippingAddress {
 
 
-    private  String name;
-    private  String address;
-    private  String city;
-    private  String state;
-    private  int ZipCode;
+    private static String name;
+    private static String address;
+    private static String city;
+    private static String state;
+    private static int ZipCode;
 
     public ShippingAddress() {
 
@@ -62,7 +62,7 @@ public class ShippingAddress {
         ZipCode = zipCode;
     }
 
-    public  String toString(ShippingAddress currentBuyer) {
+    public static String toString(ShippingAddress currentBuyer) {
         return "TO: " + name + "\n" +
                 address + "\n" +
                 city + ", " + state +
