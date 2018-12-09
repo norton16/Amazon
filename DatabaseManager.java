@@ -54,8 +54,10 @@ public class DatabaseManager {
 
 
             }
+
             fr.close();
             br.close();
+
         }
         catch (Exception e) {
             return new ArrayList<>();
@@ -103,12 +105,12 @@ public class DatabaseManager {
                     break;
                 }
                 String[] v = word.split(",");
+                ShippingAddress s = new ShippingAddress(v[4], v[5], v[6], v[7], Integer.valueOf(v[8]));
                 packages.add(new Package(v[0], v[1],
                         Double.valueOf(v[2]),
-                        Double.valueOf(v[3]),
-                        new ShippingAddress(v[4], v[5], v[6], v[7], Integer.valueOf(v[8]))));
-
+                        Double.valueOf(v[3]), s));
             }
+
             fr.close();
             br.close();
         }
@@ -145,8 +147,10 @@ public class DatabaseManager {
                 }
                 profit += word;
             }
+
             fr.close();
             br.close();
+
         }
         catch (Exception e) {
             return 0;
@@ -180,8 +184,10 @@ public class DatabaseManager {
                 }
                 number += word;
             }
+
             fr.close();
             br.close();
+
         }
         catch (Exception e) {
             return 0;
@@ -215,12 +221,13 @@ public class DatabaseManager {
                 }
                 prime += word;
             }
+
             fr.close();
             br.close();
 
+
         }
         catch (Exception e) {
-
             return false;
         }
         return prime.equals("1");
@@ -249,27 +256,26 @@ public class DatabaseManager {
         {
             if(vehicles.get(i) instanceof Truck)
             {
-                vehicles2 += ("Truck," + vehicles.get(i).getLicensePlate() + "," + vehicles.get(i).getMaxWeight());
+                vehicles2 += ("Truck," + vehicles.get(i).getLicensePlate() + "," + vehicles.get(i).getMaxWeight() + '\n');
             }
             if(vehicles.get(i) instanceof Drone)
             {
-                vehicles2 += ("Drone," + vehicles.get(i).getLicensePlate() + "," + vehicles.get(i).getMaxWeight());
+                vehicles2 += ("Drone," + vehicles.get(i).getLicensePlate() + "," + vehicles.get(i).getMaxWeight()+ '\n');
             }
             if(vehicles.get(i) instanceof CargoPlane)
             {
-                vehicles2 += ("Cargoplane," + vehicles.get(i).getLicensePlate() + "," + vehicles.get(i).getMaxWeight());
+                vehicles2 += ("Cargo Plane," + vehicles.get(i).getLicensePlate() + "," + vehicles.get(i).getMaxWeight()+ '\n');
             }
-            vehicles2 += '\n';
+
         }
         try {
             //File f = new File(file.getAbsolutePath());
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            for(int i = 0; i < vehicles.size(); i++)
-            {
+
                 bw.write(vehicles2);
-            }
+
 
             bw.close();
             fw.close();
@@ -326,8 +332,10 @@ public class DatabaseManager {
 
             bw.write(packages2);
 
+
             bw.close();
             fw.close();
+
 
         }
         catch (Exception e) {
@@ -349,6 +357,7 @@ public class DatabaseManager {
         //TODO
         String profit2 = String.valueOf(profit);
         try {
+
             //File f = new File(file.getAbsolutePath());
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -396,10 +405,6 @@ public class DatabaseManager {
     }
 
 
-
-
-
-
     /**
      * Saves status of prime day to text file. If it is primeDay "1" will be
      * writtern, otherwise "0" will be written.
@@ -426,11 +431,8 @@ public class DatabaseManager {
 
             bw.write(prime);
 
-
             bw.close();
             fw.close();
-
-
         }
         catch (Exception e) {
             System.out.println("Prime Save Error");

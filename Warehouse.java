@@ -130,9 +130,8 @@ public class Warehouse {
             {
                 price = price * 0.85;
             }
-
-            Package p = new Package(id, productname, weight, price,
-                    new ShippingAddress(buyername, address, city, state, zip));
+            ShippingAddress s =  new ShippingAddress(buyername, address, city, state, zip);
+            Package p = new Package(id, productname, weight, price, s);
             System.out.println(p.shippingLabel());
 
             ArrayList<Package> x = DatabaseManager.loadPackages(PACKAGE_FILE);
