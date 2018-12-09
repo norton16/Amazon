@@ -135,8 +135,8 @@ public class Package {
 
         //TODO
     	return ShippingAddress.toString(destination) +
-                "Weight:       " + getWeight() +
-                "Price:    $" + getPrice() +
+                "Weight:       " + String.format("%.2f", getWeight()) +
+                "Price:    $" + String.format("%.2f", getPrice()) +
                 "Product: " + getProduct();
 
     }

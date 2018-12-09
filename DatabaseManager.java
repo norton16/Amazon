@@ -28,7 +28,7 @@ public class DatabaseManager {
         ArrayList<Vehicle> vehicles = new ArrayList<>();
 
         try {
-            File f = new File(file.getPath());
+            File f = new File(file.getAbsolutePath());
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
 
@@ -93,7 +93,7 @@ public class DatabaseManager {
         ArrayList<Package> packages = new ArrayList<>();
 
         try {
-            File f = new File(file.getPath());
+            File f = new File(file.getAbsolutePath());
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
 
@@ -134,7 +134,7 @@ public class DatabaseManager {
     	//TODO
         String profit = "";
         try {
-            File f = new File(file.getPath());
+            File f = new File(file.getAbsolutePath());
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
 
@@ -169,7 +169,7 @@ public class DatabaseManager {
     	//TODO
         String number = "";
         try {
-            File f = new File(file.getPath());
+            File f = new File(file.getAbsolutePath());
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
 
@@ -204,7 +204,7 @@ public class DatabaseManager {
     	//TODO
         String prime = "";
         try {
-            File f = new File(file.getPath());
+            File f = new File(file.getAbsolutePath());
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
 
@@ -260,7 +260,7 @@ public class DatabaseManager {
             vehicles2 += '\n';
         }
         try {
-            File f = new File(file.getPath());
+            File f = new File(file.getAbsolutePath());
             FileWriter fw = new FileWriter(f);
             BufferedWriter bw = new BufferedWriter(fw);
 
@@ -317,7 +317,7 @@ public class DatabaseManager {
             packages2 += '\n';
         }
         try {
-            File f = new File(file.getPath());
+            File f = new File(file.getAbsolutePath());
             FileWriter fw = new FileWriter(f);
             BufferedWriter bw = new BufferedWriter(fw);
 
@@ -348,7 +348,7 @@ public class DatabaseManager {
     	//TODO
         String profit2 = String.valueOf(profit);
         try {
-            File f = new File(file.getPath());
+            File f = new File(file.getAbsolutePath());
             FileWriter fw = new FileWriter(f);
             BufferedWriter bw = new BufferedWriter(fw);
 
@@ -377,7 +377,7 @@ public class DatabaseManager {
     	//TODO
         String profit2 = String.valueOf(nPackages);
         try {
-            File f = new File(file.getPath());
+            File f = new File(file.getAbsolutePath());
             FileWriter fw = new FileWriter(f);
             BufferedWriter bw = new BufferedWriter(fw);
 
@@ -417,7 +417,7 @@ public class DatabaseManager {
             prime = "0";
         }
         try {
-            File f = new File(file.getPath());
+            File f = new File(file.getAbsolutePath());
             FileWriter fw = new FileWriter(f);
             BufferedWriter bw = new BufferedWriter(fw);
 
