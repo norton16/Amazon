@@ -1,10 +1,20 @@
 import java.util.ArrayList;
-
+/**
+ * Project 05 -- Amazon Warehouse
+ *
+ * This program uses classes and interfaces to simulate Amazon.
+ *
+ * @author Brian Norton, Briana Crowe, lab sec 015
+ *
+ * @version December 9, 2018
+ *
+ */
 
 /**
  * <h1>CargoPlane</h1> Represents a Cargo Plane
  */
 public class CargoPlane extends Vehicle {
+    private static double currentWeight;
     final double GAS_RATE = 2.33;
 
     /**
@@ -12,7 +22,11 @@ public class CargoPlane extends Vehicle {
      */
     //============================================================================
     //TODO
-    
+
+    public CargoPlane() {
+
+    }
+
     //============================================================================
 
     /**
@@ -22,8 +36,12 @@ public class CargoPlane extends Vehicle {
      * @param maxWeight    maximum weight that the vehicle can hold
      */
     //============================================================================
-    //TODO
-    
+
+    public CargoPlane(String licensePlate, double maxWeight) {
+        super(licensePlate, maxWeight);
+
+    }
+
     //============================================================================
 
     /**
@@ -32,10 +50,37 @@ public class CargoPlane extends Vehicle {
      *
      * @param warehousePackages List of packages to add from
      */
-    @Override
+
+    double cargoCurrentWeight = 0;
+
     public void fill(ArrayList<Package> warehousePackages) {
-    	//TODO
-        
+
+        cargoCurrentWeight = 0;
+        int maxRange = 0;
+
+        for (int i = 0; i < warehousePackages.size(); i++) {
+            int thisRange = Math.abs(getZipDest() - warehousePackages.get(i).getDestination().getZipCode());
+            if (thisRange > maxRange) {
+                maxRange = thisRange * 10;
+            }
+
+        }
+
+        for (int i = 0; i < warehousePackages.size(); i++) {
+            for (int j = 0; j <= maxRange; j++) {
+
+                if (Math.abs(warehousePackages.get(i).getDestination().getZipCode() - getZipDest()) == j) {
+                    Package currentPackage = warehousePackages.get(i);
+                    if (currentPackage.getWeight() + cargoCurrentWeight < getMaxWeight()) {
+                        getPackages().add(currentPackage);
+                        cargoCurrentWeight += currentPackage.getWeight();
+                    }
+                }
+            }
+
+
+        }
+
     }
 
     /*
@@ -52,8 +97,18 @@ public class CargoPlane extends Vehicle {
      */
     @Override
     public double getProfit() {
-    	//TODO
-        
+        double profit = 0;
+        for (int i = 0; i < getPackages().size(); i++) {
+            Package current = getPackages().get(i);
+            double price = current.getPrice();
+            profit += price;
+
+        }
+
+        double gasPrice = GAS_RATE * (getMaxRange() * 10);
+        profit -= gasPrice;
+        return profit;
+
     }
 
     /**
@@ -70,10 +125,25 @@ public class CargoPlane extends Vehicle {
      */
     @Override
     public String report() {
-    	//TODO
-       
+
+        String packageLabels = "";
+
+        for (int i = 0; i < getPackages().size(); i++) {
+            String thisPackage = getPackages().get(i).shippingLabel();
+            packageLabels += thisPackage;
+        }
+        String report = "==========Cargo Plane Report==========\n" +
+                "License Plate No.: " + getLicensePlate() + "\n" +
+                "Destination: " + getZipDest() + "\n" +
+                "Weight Load: " + cargoCurrentWeight + "/" + getMaxWeight() + "\n" +
+                "Net Profit: $" + getProfit() + "\n" +
+                "=====Shipping Labels=====\n" +
+                "====================\n" + packageLabels;
+
+        return report;
+
     }
 
-   
-   
+
+
 }

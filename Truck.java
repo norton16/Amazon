@@ -1,5 +1,14 @@
 import java.util.ArrayList;
-
+/**
+ * Project 05 -- Amazon Warehouse
+ *
+ * This program uses classes and interfaces to simulate Amazon.
+ *
+ * @author Brian Norton, Briana Crowe, lab sec 015
+ *
+ * @version December 9, 2018
+ *
+ */
 
 /**
  * <h1>Truck</h1> Represents a Truck
@@ -13,18 +22,24 @@ public class Truck extends Vehicle {
      */
     //============================================================================
     //TODO
-    
+
+    public Truck() {
+
+    }
+
     //============================================================================
 
     /**
      * Constructor
-     * 
+     *
      * @param licensePlate license plate of vehicle
      * @param maxWeight    maximum weight that the vehicle can hold
      */
     //============================================================================
-    //TODO
-    
+    public Truck(String licensePlate, double maxWeight) {
+        super(licensePlate, maxWeight);
+    }
+
     //============================================================================
 
     /*
@@ -40,8 +55,18 @@ public class Truck extends Vehicle {
      */
     @Override
     public double getProfit() {
-        //TODO
-    	
+        double profit = 0;
+        for (int i = 0; i < getPackages().size(); i++) {
+            Package current = getPackages().get(i);
+            double price = current.getPrice();
+            profit += price;
+
+        }
+
+        double gasPrice = GAS_RATE * getMaxRange();
+        profit -= gasPrice;
+        return profit;
+
     }
 
     /**
@@ -53,13 +78,28 @@ public class Truck extends Vehicle {
      * <li>Net Profit</li>
      * <li>Shipping labels of all packages in truck</li>
      * </ul>
-     * 
+     *
      * @return Truck Report
      */
     @Override
     public String report() {
-        //TODO
-    	
+        String packageLabels = "";
+
+        for (int i = 0; i < getPackages().size(); i++) {
+            String thisPackage = getPackages().get(i).shippingLabel();
+            packageLabels += thisPackage;
+
+        }
+        String report = "==========Cargo Plane Report==========\n" +
+                "License Plate No.: " + getLicensePlate() + "\n" +
+                "Destination: " + getZipDest() + "\n" +
+                "Weight Load: " + getCurrentWeight() + "/" + getMaxWeight() + "\n" +
+                "Net Profit: $" + getProfit() + "\n" +
+                "=====Shipping Labels=====\n" +
+                "====================\n" + packageLabels;
+
+        return report;
+
     }
 
 
